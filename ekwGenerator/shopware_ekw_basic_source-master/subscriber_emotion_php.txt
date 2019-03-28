@@ -1,0 +1,48 @@
+<?php
+
+namespace [::plugin_name::]\Subscriber;
+
+use Enlight\Event\SubscriberInterface;
+use Shopware\Components\Theme\LessDefinition;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * Class Emotion
+ * @package [::plugin_name::]\Subscriber
+ */
+class Emotion implements SubscriberInterface
+{
+    /**
+     * @return array
+     */
+    public static function getSubscribedEvents()
+    {
+        return [
+            'Enlight_Controller_Action_PostDispatchSecure_Frontend'         => 'onPostDispatch',
+            'Enlight_Controller_Action_PostDispatch_Frontend'               => 'onPostDispatch',
+            'Enlight_Controller_Action_PostDispatchSecure_Widgets'          => 'onPostDispatch',
+            'Theme_Compiler_Collect_Plugin_Less'                            => 'addLessFiles'
+        ];
+    }
+
+    /**
+     * @param \Enlight_Event_EventArgs $args
+     */
+    public function onPostDispatch(\Enlight_Event_EventArgs $args)
+    {
+        $controller = $args->get('subject');
+        $view = $controller->View();
+        $request = $controller->Request();
+
+        $view->addTemplateDir(__DIR__ . '/../Resources/views');
+        $view->addTemplateDir(__DIR__ . '/../Resources/views/emotion_components');
+    }
+
+    /**
+     * @return LessDefinition
+     */
+    public function addLessFiles()
+    {
+        return new LessDefinition([], [__DIR__ . '/../Resources/views/frontend/_public/src/less/all.less']);
+    }
+}

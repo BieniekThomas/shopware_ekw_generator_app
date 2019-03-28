@@ -1,0 +1,39 @@
+$color: #0e0e29;
+
+.Button {
+    background-color: $color;
+    border: none;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: all 0.25s ease-in-out;
+
+    &:hover {
+        background-color: lighten($color, 10%);
+    }
+
+    &:disabled {
+        color: #eee;
+        background-color: rgba($color, 0.6);
+        cursor: not-allowed;
+    }
+
+    &:first-of-type {
+        margin-left: 0;
+    }
+
+    .Success {
+        color: #5c9210;
+    }
+
+    .Danger {
+        color: #944317;
+    }
+}

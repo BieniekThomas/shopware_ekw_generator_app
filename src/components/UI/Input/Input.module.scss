@@ -1,0 +1,48 @@
+.Input {
+    min-width: 100%;
+    padding: 10px 0 20px;
+    box-sizing: border-box;
+    position: relative;
+    border-width: 0 0 1px 0;
+}
+
+.requiredlabel {
+    position: absolute;
+    bottom: 0px;
+    font-size: 12px;
+    right: 0;
+}
+
+.Label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 12px;
+    text-transform: none;
+}
+
+.InputElement {
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: transparent;
+    font: inherit;
+    padding: 6px 10px 3px 0;
+    display: block;
+    min-width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    border-width: 0 0 1px 0;
+    transition: all 0.25s ease-in-out;
+}
+
+.InputElement:focus {
+    outline: none;
+    background-color: transparent;
+    border-color: blue;
+}
+
+.Invalid {
+    border-color: red;
+    background-color: #fff;
+    color: red;
+}
