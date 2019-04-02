@@ -4,6 +4,7 @@ database.rules.json
 firebase.json
 LICENSE
 package-lock.json
+.prettierrc
 .idea/
 .vscode/
 node_modules/
