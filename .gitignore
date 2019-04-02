@@ -1,0 +1,6 @@
+node_modules
+tmp
+database.rules.json
+firebase.json
+LICENSE
+package-lock.json
