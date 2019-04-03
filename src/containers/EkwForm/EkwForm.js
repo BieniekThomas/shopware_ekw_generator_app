@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Axios from "axios";
-// import { navigate } from "@reach/router";
 import { connect } from "react-redux";
 
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
