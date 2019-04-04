@@ -1,5 +1,4 @@
 import * as actionTypes from "./actionTypes";
-// import { checkValidity } from "../../shared/utility";
 
 // normal fields
 export const fieldChange = (event, inputIdentifier) => {
@@ -61,5 +60,14 @@ export const selectFieldChange = (event, id) => {
 export const emptyFields = () => {
     return {
         type: actionTypes.EMPTY_FIELDS
+    };
+};
+
+export const checkFormValid = (event, inputIdentifier) => {
+    return {
+        type: actionTypes.CHECK_FORM_VALID,
+        value: event.target.value,
+        name: event.target.name,
+        id: inputIdentifier
     };
 };

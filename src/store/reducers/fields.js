@@ -1,5 +1,5 @@
 import * as actionTypes from "../actions/actionTypes";
-import { updateObject } from "../../shared/utility";
+import { updateObject, checkValidity } from "../../shared/utility";
 
 const initalState = {
     ekwFields: {
@@ -50,7 +50,7 @@ const initalState = {
             elementType: "input",
             elementConfig: {
                 type: "text",
-                placeholder: "www.econsor.de",
+                placeholder: "www.yourDomain.de",
                 label: "Link"
             },
             value: "",
@@ -62,7 +62,7 @@ const initalState = {
         }
     },
     backendFields: {},
-    formIsValid: true
+    formIsValid: false
 };
 
 const initialStateCopy = { ...initalState };
@@ -166,6 +166,30 @@ const emptyFields = (state, action) => {
     });
 };
 
+const checkFormValid = (state, action) => {
+    const id = action.id;
+    let formIsValid = true;
+    const inputValid = checkValidity(
+        action.value,
+        state.ekwFields[id].validation
+    );
+    console.log("Input is valid: ", inputValid);
+    const updateEkwField = updateObject(state.ekwFields[id], {
+        valid: inputValid
+    });
+    const updateEkwFields = updateObject(state.ekwFields, {
+        [id]: updateEkwField
+    });
+    for (let inputIdentifier in updateEkwFields) {
+        formIsValid = updateEkwFields[inputIdentifier].valid && formIsValid;
+    }
+    console.log("Form is Valid: ", formIsValid);
+    return updateObject(state, {
+        formIsValid: formIsValid,
+        ekwFields: updateEkwFields
+    });
+};
+
 const reducer = (state = initalState, action) => {
     switch (action.type) {
         case actionTypes.EMPTY_FIELDS:
@@ -180,6 +204,8 @@ const reducer = (state = initalState, action) => {
             return addBackendField(state, action);
         case actionTypes.BACKENDFIELD_CHANGE:
             return backendFieldChange(state, action);
+        case actionTypes.CHECK_FORM_VALID:
+            return checkFormValid(state, action);
         default:
             return state;
     }
