@@ -72,8 +72,7 @@ const fieldChange = (state, action) => {
     const id = action.id;
     const updatedFormElement = updateObject(state.ekwFields[id], {
         value: action.updatedFormElement.value,
-        // valid: action.updatedFormElement.valid,
-        touched: action.updatedFormElement.valid
+        touched: action.updatedFormElement.touched
     });
     const updatedOrderForm = updateObject(state.ekwFields, {
         [id]: updatedFormElement
@@ -173,7 +172,6 @@ const checkFormValid = (state, action) => {
         action.value,
         state.ekwFields[id].validation
     );
-    console.log("Input is valid: ", inputValid);
     const updateEkwField = updateObject(state.ekwFields[id], {
         valid: inputValid
     });
@@ -183,7 +181,6 @@ const checkFormValid = (state, action) => {
     for (let inputIdentifier in updateEkwFields) {
         formIsValid = updateEkwFields[inputIdentifier].valid && formIsValid;
     }
-    console.log("Form is Valid: ", formIsValid);
     return updateObject(state, {
         formIsValid: formIsValid,
         ekwFields: updateEkwFields
