@@ -6,5 +6,6 @@ export {
     addBackendField,
     removeBackendField,
     backendFieldChange,
-    selectFieldChange
+    selectFieldChange,
+    checkFormValid
 } from "./fields";

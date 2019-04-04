@@ -14,16 +14,12 @@ import BackendForm from "../backendForm/BackendForm";
 class EkwForm extends Component {
     inputChangedHandler = (event, inputIdentifier) => {
         this.props.fieldChange(event, inputIdentifier);
+        this.props.checkFormValid(event, inputIdentifier);
     };
-
-    //     let formIsValid = true;
-    //     for (let inputIdentifier in updatedOrderForm) {
-    //         formIsValid =
-    //             updatedOrderForm[inputIdentifier].valid && formIsValid;
-    //     }
 
     onSubmitHandler = event => {
         event.preventDefault();
+        // @todo: fetchData in Redux
         const formData = {
             normal: {},
             backendFields: {}
@@ -150,7 +146,9 @@ const mapDispatchToProps = dispatch => {
         submitForm: formData => dispatch(actions.submitForm(formData)),
         resetFields: () => dispatch(actions.emptyFields()),
         fieldChange: (event, inputIdentifier) =>
-            dispatch(actions.fieldChange(event, inputIdentifier))
+            dispatch(actions.fieldChange(event, inputIdentifier)),
+        checkFormValid: (event, inputIdentifier) =>
+            dispatch(actions.checkFormValid(event, inputIdentifier))
     };
 };
 

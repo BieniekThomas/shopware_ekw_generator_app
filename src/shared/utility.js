@@ -33,7 +33,7 @@ export const checkValidity = (value, rules) => {
         isValid = pattern.test(value) && isValid;
     }
 
-    if (rules.isValidEkwName) {
+    if (rules.isValidEkwName || rules.isValidBackendName) {
         // eslint-disable-next-line
         const pattern = new RegExp(/^[a-z0-9]+$/i);
         isValid = pattern.test(value) && isValid;
