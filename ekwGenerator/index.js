@@ -13,10 +13,9 @@ async function ekwGenerator(
     author = "tb",
     link = "https://codepen.io/BieniekThomas/"
 ) {
-    var fixedEkwName = handleEkwName.handleEkwName(ekwName);
-    var fixedEkwFileName = makeOtherCase.makeOtherCase(ekwName);
-
     try {
+        var fixedEkwName = handleEkwName.handleEkwName(ekwName);
+        var fixedEkwFileName = makeOtherCase.makeOtherCase(ekwName);
         await deletePrevFiles();
         await makeDirectoriesAndFiles(fixedEkwName, fixedEkwFileName);
         await replaceStrings(fixedEkwName, description);

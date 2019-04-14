@@ -26,23 +26,30 @@ app.use(function(req, res, next) {
 app.use(bodyParser.json());
 
 // @todo find out why it returns too soon; clue: file not found before ekw.zip found in zip-handler
+// @me: this seems to work now properly
 app.post("/ekw-submit", async function(req, res) {
+    let fileFound = false;
     console.log("request: ", req.body);
     const pathZip = path.join(__dirname, "tmp", "ekw.zip");
     await ekwGenerator(req.body.ekwName, req.body.description);
-    await fs.access(pathZip, fs.F_OK, err => {
-        if (err) {
-            console.log("server: file not found");
-            res.end();
-        } else {
-            // console.log("server: file found");
-            res.end();
+    setInterval(() => {
+        if (fileFound === false) {
+            fs.access(pathZip, fs.F_OK, err => {
+                if (err) {
+                    console.log("server: file not found");
+                } else {
+                    console.log("server: file found");
+                    fileFound = true;
+                    res.end();
+                }
+            });
         }
-    });
+    }, 150);
+    // @todo Kill setInterval after file has been found
 });
 
 app.get("/success", async function(req, res) {
-    await res.header(
+    res.header(
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"
     );
